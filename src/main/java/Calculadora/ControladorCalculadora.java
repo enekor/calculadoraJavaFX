@@ -7,7 +7,7 @@ import lombok.Data;
 public class ControladorCalculadora {
 
     private ModeloCalculadora modelo = new ModeloCalculadora();
-    private String num1,num2,operador;
+    private String num1="0",num2,operador;
 
     public void controlador(){}
 

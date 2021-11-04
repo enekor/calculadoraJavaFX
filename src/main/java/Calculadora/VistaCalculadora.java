@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class VistaCalculadora extends GridPane {
-    private Button uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,cero,mas,menos,entre,por,coma,igual,c;
+    private Button uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,cero,mas,menos,entre,por,coma,igual,c,minus;
     private Label pantalla, pantalla2;
 
     private ControladorCalculadora controlador= new ControladorCalculadora();
@@ -66,6 +66,8 @@ public class VistaCalculadora extends GridPane {
             controlador.setNum2("0");
         });
         pantalla2 = new Label();
+        minus = new Button("-x");
+        minus.setOnMouseClicked(e->pantalla.setText("-"));
 
         posiciones();
         estetica();
@@ -108,6 +110,7 @@ public class VistaCalculadora extends GridPane {
         cero.setStyle("-fx-background-color: #0A0100;");
         coma.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
         coma.setStyle("-fx-background-color: #0A0100;");
+        minus.setStyle("-fx-background-color: #0A0100");
 
         this.setStyle("-fx-background-color: #0A0100");
     }
@@ -115,7 +118,7 @@ public class VistaCalculadora extends GridPane {
     private void posiciones(){
         this.add(pantalla2,1,1,4,2);
         this.add(pantalla,1,3,4,2);
-        this.add(cero,1,9,2,1);
+        this.add(cero,1,9,1,1);
         this.add(uno,1,8,1,1);
         this.add(dos,2,8,1,1);
         this.add(tres,3,8,1,1);
@@ -132,6 +135,7 @@ public class VistaCalculadora extends GridPane {
         this.add(entre,2,5,1,1);
         this.add(c,1,5,1,1);
         this.add(coma,3,9,1,1);
+        this.add(minus,2,9,1,1);
     }
 
     private void calcular(String calculando){
@@ -140,7 +144,7 @@ public class VistaCalculadora extends GridPane {
         controlador.setOperador(calculando);
         pantalla2.setText(controlador.getNum1()+" "+calculando+" ");
         if(calculando.equalsIgnoreCase("x"))
-            pantalla2.setText(pantalla.getText()+" * ");
+            pantalla2.setText(controlador.getNum1()+" * ");
         pantalla.setText("");
     }
 
