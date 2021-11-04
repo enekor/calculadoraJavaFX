@@ -41,44 +41,30 @@ public class VistaCalculadora extends GridPane {
         cero = new Button("0");
         cero.setOnMouseClicked(e-> pantalla.setText(pantalla.getText()+"0"));
         mas = new Button("+");
-        mas.setOnMouseClicked(e->{
-            controlador.setNum1(pantalla.getText());
-            controlador.setOperador("+");
-            pantalla2.setText(pantalla.getText()+" + ");
-            pantalla.setText("");
-        });
+        mas.setOnMouseClicked(e->calcular("+"));
         menos = new Button("-");
-        menos.setOnMouseClicked(e->{
-            controlador.setNum1(pantalla.getText());
-            controlador.setOperador("-");
-            pantalla2.setText(pantalla.getText()+" - ");
-            pantalla.setText("");
-        });
+        menos.setOnMouseClicked(e->calcular("-"));
         entre = new Button("/");
-        entre.setOnMouseClicked(e->{
-            controlador.setNum1(pantalla.getText());
-            controlador.setOperador("/");
-            pantalla2.setText(pantalla.getText()+" / ");
-            pantalla.setText("");
-        });
+        entre.setOnMouseClicked(e->calcular("/"));
         por = new Button("x");
-        por.setOnMouseClicked(e->{
-            controlador.setNum1(pantalla.getText());
-            controlador.setOperador("X");
-            pantalla2.setText(pantalla.getText()+" * ");
-            pantalla.setText("");
-        });
+        por.setOnMouseClicked(e->calcular("X"));
         igual = new Button("=");
         igual.setOnMouseClicked(e->{
             controlador.setNum2(pantalla.getText());
-            pantalla2.setText(pantalla2.getText()+pantalla.getText()+" = ");
-            pantalla.setText(controlador.calcular());
+            pantalla2.setText(pantalla2.getText()+pantalla.getText()+" = "+controlador.calcular());
+            pantalla.setText("");
+            controlador.setNum1(controlador.calcular());
         });
         coma = new Button(".");
         coma.setOnMouseClicked(e-> pantalla.setText(pantalla.getText()+"."));
         pantalla = new Label("");
         c = new Button("C");
-        c.setOnMouseClicked(e-> pantalla.setText(""));
+        c.setOnMouseClicked(e-> {
+            pantalla.setText("");
+            pantalla2.setText("");
+            controlador.setNum1("0");
+            controlador.setNum2("0");
+        });
         pantalla2 = new Label();
 
         posiciones();
@@ -146,6 +132,16 @@ public class VistaCalculadora extends GridPane {
         this.add(entre,2,5,1,1);
         this.add(c,1,5,1,1);
         this.add(coma,3,9,1,1);
+    }
+
+    private void calcular(String calculando){
+        if(!pantalla.getText().equalsIgnoreCase(""))
+            controlador.setNum1(pantalla.getText());
+        controlador.setOperador(calculando);
+        pantalla2.setText(controlador.getNum1()+" "+calculando+" ");
+        if(calculando.equalsIgnoreCase("x"))
+            pantalla2.setText(pantalla.getText()+" * ");
+        pantalla.setText("");
     }
 
 }

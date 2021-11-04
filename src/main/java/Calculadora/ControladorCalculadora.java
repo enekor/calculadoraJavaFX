@@ -1,7 +1,9 @@
 package Calculadora;
 
 import javafx.scene.control.Label;
+import lombok.Data;
 
+@Data
 public class ControladorCalculadora {
 
     private ModeloCalculadora modelo = new ModeloCalculadora();
